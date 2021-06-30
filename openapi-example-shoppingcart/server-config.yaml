@@ -1,0 +1,14 @@
+---
+artifactId: demo.shoppingcart.server
+groupId: com.ionos.network
+artifactVersion: 1.0.0
+hideGenerationTimestamp: true
+developerEmail: stephan.fuhrmann@ionos.com
+developerOrganizationUrl: https://www.ionos.com/
+developerName: Stephan Fuhrmann
+additionalProperties:
+  invokerPackage: com.ionos.demo.shoppingcart.openapi
+  apiPackage: com.ionos.demo.shoppingcart.openapi.api
+  modelPackage: com.ionos.demo.shoppingcart.openapi.model
+  dateLibrary: java8
+  java8: true

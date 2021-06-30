@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: stephan.fuhrmann@ionos.com
+  description: Manages a shopping cart
+  license:
+    name: GNU GENERAL PUBLIC LICENSE v3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.txt
+  title: Shopping cart API
+  version: 0.0.1
+servers:
+- description: Localhost
+  url: http://localhost:8080/api/
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/sfuhrm.de/ShoppingCart/0.0.1  
+paths:
+  /carts:
+    post:
+      description: |
+        Creates a new shopping cart.
+      operationId: newCart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref:  "#/components/schemas/ShoppingCartObject"
+          #application/xml:
+          #  schema:
+          #    $ref:  "#/components/schemas/ShoppingCartObject"
+      responses:
+        "201":
+          description: The shopping cart service response.
+          content:
+            application/json:
+              schema:
+                $ref:  "#/components/schemas/ShoppingCartObject"
+          links:
+            GetCardByCardId:
+              operationId: getCartById
+              parameters:
+                cartId: "$response.body#/id"
+  /cart/{cartId}:
+    get:
+      description: |
+        Gets the shopping cart.
+      operationId: getCartById
+      parameters:
+        - $ref: "#/components/parameters/CartIdParam"
+      responses:
+        "200":
+          description: The shopping cart service response.
+          content:
+            application/json:
+              schema:
+                $ref:  "#/components/schemas/ShoppingCartObject"
+          links:
+            GetCartItems:
+              operationId: getCartItems
+              parameters:
+                cartId: "$response.body#/id"
+    delete:
+      description: |
+        Deletes the shopping cart.
+      operationId: deleteCartById
+      parameters:
+        - $ref: "#/components/parameters/CartIdParam"
+      responses:
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref:  "#/components/schemas/ShoppingCartObject"
+          description: The shopping cart service response.
+  /cart/{cartId}/items:
+    get:
+      description: |
+        Gets the shopping cart items.
+      operationId: getCartItems
+      parameters:
+        - $ref: "#/components/parameters/CartIdParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ShoppingCartItem"
+          description: The shopping cart service response.
+    put:
+      description: |
+        Updates the shopping cart items.
+      operationId: putCartItems
+      parameters:
+        - $ref: "#/components/parameters/CartIdParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ShoppingCartItem"
+          description: The shopping cart service response.
+components:
+  parameters:
+    CartIdParam:
+      name: cartId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    ShoppingCartObject:
+      properties:
+        id:
+          type: string
+          readOnly: true
+        owner:
+          type: string
+          example: stephan.fuhrmann
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expires_at:
+          type: string
+          format: date-time
+    ShoppingCartItem:
+      required:
+        - quantity
+        - item_asin
+      properties:
+        index:
+          type: number
+          format: int32
+          minimum: 0
+          example: 0
+        quantity:
+          type: number
+          format: int32
+          minimum: 1
+          example: 1
+        item_asin:
+          type: string
+          pattern: "[0-9A-Z]{10}"
+          example: B0711Z67W9

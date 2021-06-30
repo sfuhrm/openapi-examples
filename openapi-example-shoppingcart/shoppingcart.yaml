@@ -134,12 +134,12 @@ components:
         - item_asin
       properties:
         index:
-          type: number
+          type: integer
           format: int32
           minimum: 0
           example: 0
         quantity:
-          type: number
+          type: integer
           format: int32
           minimum: 1
           example: 1

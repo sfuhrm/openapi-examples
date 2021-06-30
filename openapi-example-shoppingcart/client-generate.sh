@@ -4,13 +4,15 @@ SCRIPTHOME="$(cd $(dirname "$0"); pwd)"
 OUTDIR=$SCRIPTHOME/client
 set -e
 mkdir -p $OUTDIR
+export JAVA_POST_PROCESS_FILE="java -jar $SCRIPTHOME/../bin/google-java-format.jar --replace "
 java -jar $SCRIPTHOME/../bin/openapi-generator-cli.jar generate \
+--enable-post-process-file \
 --package-name com.ionos.demo.shoppingcart.client \
 --input-spec $SCRIPTHOME/shoppingcart.yaml \
 -g java \
 -c $SCRIPTHOME/client-config.yaml \
 -o $OUTDIR
 
-xmlstarlet fo < $OUTDIR/pom.xml > /tmp/t && mv /tmp/t $OUTDIR/pom.xml
-
-xmlstarlet fo < $OUTDIR/src/main/AndroidManifest.xml > /tmp/t && mv /tmp/t $OUTDIR/src/main/AndroidManifest.xml
+for FILE in $OUTDIR/pom.xml $OUTDIR/src/main/AndroidManifest.xml; do
+    xmlstarlet fo < $FILE > /tmp/t && mv /tmp/t $FILE
+done

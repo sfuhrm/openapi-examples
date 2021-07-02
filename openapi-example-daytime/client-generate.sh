@@ -10,7 +10,7 @@ java -jar $SCRIPTHOME/../bin/openapi-generator-cli.jar generate \
 --package-name com.ionos.demo.daytime.client \
 --input-spec $SCRIPTHOME/daytime.yaml \
 -g java \
--c $SCRIPTHOME/server-config.yaml \
+-c $SCRIPTHOME/client-config.yaml \
 -o $OUTDIR
 
 for FILE in $OUTDIR/pom.xml $OUTDIR/src/main/AndroidManifest.xml; do

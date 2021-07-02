@@ -10,6 +10,6 @@ java -jar $SCRIPTHOME/../bin/openapi-generator-cli.jar generate \
 --package-name com.ionos.demo.daytime.server \
 --input-spec $SCRIPTHOME/daytime.yaml \
 -g spring \
--c $SCRIPTHOME/client-config.yaml \
+-c $SCRIPTHOME/server-config.yaml \
 -o $OUTDIR
 xmlstarlet fo < $OUTDIR/pom.xml > /tmp/t && mv /tmp/t $OUTDIR/pom.xml

@@ -12,10 +12,18 @@ servers:
 - description: Localhost
   url: http://localhost:8080/api/
 - description: SwaggerHub API Auto Mocking
-  url: https://virtserver.swaggerhub.com/sfuhrm.de/ShoppingCart/0.0.1  
+  url: https://virtserver.swaggerhub.com/sfuhrm.de/ShoppingCart/0.0.1
+tags:
+  - name: Carts
+    description: All shopping card operations
+  - name: Users
+    description: User-facing calls
 paths:
   /carts:
     post:
+      tags:
+        - Carts
+        - CartWriters
       description: |
         Creates a new shopping cart.
       operationId: newCart
@@ -42,6 +50,9 @@ paths:
                 cartId: "$response.body#/id"
   /cart/{cartId}:
     get:
+      tags:
+        - Carts
+        - CartWriters
       description: |
         Gets the shopping cart.
       operationId: getCartById
@@ -60,6 +71,9 @@ paths:
               parameters:
                 cartId: "$response.body#/id"
     delete:
+      tags:
+        - Carts
+        - CartWriters
       description: |
         Deletes the shopping cart.
       operationId: deleteCartById
@@ -74,6 +88,9 @@ paths:
           description: The shopping cart service response.
   /cart/{cartId}/items:
     get:
+      tags:
+        - Carts
+        - CartWriters
       description: |
         Gets the shopping cart items.
       operationId: getCartItems
@@ -89,6 +106,9 @@ paths:
                   $ref: "#/components/schemas/ShoppingCartItem"
           description: The shopping cart service response.
     put:
+      tags:
+        - Carts
+        - CartWriters
       description: |
         Updates the shopping cart items.
       operationId: putCartItems

@@ -27,6 +27,8 @@ paths:
 components:
   schemas:
     DateTimeObject:
+      required:
+        - date
       properties:
         date:
           type: string

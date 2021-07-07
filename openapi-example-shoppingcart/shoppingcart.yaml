@@ -7,23 +7,38 @@ info:
     name: GNU GENERAL PUBLIC LICENSE v3.0
     url: https://www.gnu.org/licenses/gpl-3.0.txt
   title: Shopping cart API
-  version: 0.0.1
+  version: 0.1.1
 servers:
 - description: Localhost
   url: http://localhost:8080/api/
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/sfuhrm.de/ShoppingCart/0.0.1
 tags:
-  - name: Carts
-    description: All shopping card operations
-  - name: Users
-    description: User-facing calls
+  - name: Middleware
+    description: All shopping cart operations
+  - name: User
+    description: Browser-facing calls
 paths:
   /carts:
+    get:
+      tags:
+        - Middleware
+      description: |
+        Lists all shopping carts.
+      operationId: listCarts
+      responses:
+        "200":
+          description: The shopping cart list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ShoppingCartObject"
     post:
       tags:
-        - Carts
-        - CartWriters
+        - User
+        - Middleware
       description: |
         Creates a new shopping cart.
       operationId: newCart
@@ -44,15 +59,15 @@ paths:
               schema:
                 $ref:  "#/components/schemas/ShoppingCartObject"
           links:
-            GetCardByCardId:
+            GetCartByCartId:
               operationId: getCartById
               parameters:
                 cartId: "$response.body#/id"
   /cart/{cartId}:
     get:
       tags:
-        - Carts
-        - CartWriters
+        - User
+        - Middleware
       description: |
         Gets the shopping cart.
       operationId: getCartById
@@ -72,8 +87,8 @@ paths:
                 cartId: "$response.body#/id"
     delete:
       tags:
-        - Carts
-        - CartWriters
+        - User
+        - Middleware
       description: |
         Deletes the shopping cart.
       operationId: deleteCartById
@@ -89,8 +104,8 @@ paths:
   /cart/{cartId}/items:
     get:
       tags:
-        - Carts
-        - CartWriters
+        - User
+        - Middleware
       description: |
         Gets the shopping cart items.
       operationId: getCartItems
@@ -107,8 +122,8 @@ paths:
           description: The shopping cart service response.
     put:
       tags:
-        - Carts
-        - CartWriters
+        - User
+        - Middleware
       description: |
         Updates the shopping cart items.
       operationId: putCartItems

@@ -31,9 +31,13 @@ Reformatting the generated code is done using the
 The service is inspired by the [daytime protocol](https://en.wikipedia.org/wiki/Daytime_Protocol),
 but is not intended to replace it or use the date formats of that protocol.
 
+The API documentation can be viewed [here](https://app.swaggerhub.com/apis-docs/sfuhrm.de/Daytime/0.0.3).
+
 ### Shopping cart service
 
 A simple shopping cart that can be accessed using HTTP.
+
+The API documentation can be viewed [here](https://app.swaggerhub.com/apis-docs/sfuhrm.de/ShoppingCart/0.1.0).
 
 ## License
 

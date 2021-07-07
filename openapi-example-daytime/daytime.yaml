@@ -1,13 +1,8 @@
 openapi: 3.0.0
 info:
-  contact:
-    email: stephan.fuhrmann@ionos.com
   description: Tells the current date and time
-  license:
-    name: GNU GENERAL PUBLIC LICENSE v3.0
-    url: https://www.gnu.org/licenses/gpl-3.0.txt
   title: Daytime API
-  version: 0.0.2
+  version: 0.0.3
 servers:
 - description: Localhost
   url: http://localhost:8080/api/

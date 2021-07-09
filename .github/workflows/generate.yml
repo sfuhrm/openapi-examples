@@ -1,0 +1,48 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ master, plainpom ]
+  pull_request:
+    branches: [ master, plainpom ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK ${{ matrix.java }}
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: 11
+    - name: Download OpenAPI Generator and Google Formatter
+      run: bash ./download.sh
+
+    - name: Generate  openapi-example-daytime client
+      run: bash ./openapi-example-daytime/client-generate.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: openapi-example-daytime-client
+        path: ./openapi-example-daytime/client
+
+    - name: Generate  openapi-example-daytime server
+      run: bash ./openapi-example-daytime/server-generate.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: openapi-example-daytime-server
+        path: ./openapi-example-daytime/server
+
+    - name: Generate  openapi-example-shoppingcart client
+      run: bash ./openapi-example-shoppingcart/client-generate.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: openapi-example-shoppingcart-client
+        path: ./openapi-example-shoppingcart/client
+
+    - name: Generate  openapi-example-shoppingcart server
+      run: bash ./openapi-example-shoppingcart/server-generate.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: openapi-example-shoppingcart-server
+        path: ./openapi-example-shoppingcart/server

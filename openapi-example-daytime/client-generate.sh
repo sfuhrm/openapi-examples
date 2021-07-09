@@ -12,7 +12,3 @@ java -jar $SCRIPTHOME/../bin/openapi-generator-cli.jar generate \
 -g java \
 -c $SCRIPTHOME/client-config.yaml \
 -o $OUTDIR
-
-for FILE in $OUTDIR/pom.xml $OUTDIR/src/main/AndroidManifest.xml; do
-    xmlstarlet fo < $FILE > /tmp/t && mv /tmp/t $FILE
-done

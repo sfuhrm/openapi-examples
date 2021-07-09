@@ -12,5 +12,3 @@ java -jar $SCRIPTHOME/../bin/openapi-generator-cli.jar generate \
 -g spring \
 -c $SCRIPTHOME/server-config.yaml \
 -o $OUTDIR
-
-xmlstarlet fo < $OUTDIR/pom.xml > /tmp/t && mv /tmp/t $OUTDIR/pom.xml

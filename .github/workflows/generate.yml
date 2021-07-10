@@ -1,4 +1,4 @@
-name: Java CI
+name: Build examples
 
 on:
   push:

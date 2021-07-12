@@ -1,5 +1,8 @@
 # OpenAPI Examples
 
+[![Build examples](https://github.com/sfuhrm/openapi-examples/actions/workflows/generate.yml/badge.svg)](https://github.com/sfuhrm/openapi-examples/actions/workflows/generate.yml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 Some simple examples to show the usage of the OpenAPI specification.
 
 Code generation is done using the [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).

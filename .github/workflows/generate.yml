@@ -1,4 +1,4 @@
-name: OpenAPI Generator
+name: Build examples
 
 on:
   push:

@@ -1,0 +1,15 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/com/ionos/demo/shoppingcart/openapi/OpenAPI2SpringBoot.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/RFC3339DateFormat.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/api/ApiUtil.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/api/CartApi.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/api/CartApiController.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/api/CartsApi.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/api/CartsApiController.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/model/ShoppingCartItem.java
+src/main/java/com/ionos/demo/shoppingcart/openapi/model/ShoppingCartObject.java
+src/main/java/org/openapitools/configuration/HomeController.java
+src/main/java/org/openapitools/configuration/OpenAPIDocumentationConfig.java
+src/main/resources/application.properties

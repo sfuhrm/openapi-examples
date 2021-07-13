@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  description: Tells the current date and time
+  title: Daytime API
+  version: 0.0.3
+servers:
+- description: Localhost
+  url: http://localhost:8080/api/
+paths:
+  /daytime:
+    get:
+      description: |
+        Gets the time of day.
+      operationId: dateTime
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DateTimeObject'
+          description: The daytime service response.
+      x-accepts: application/json
+components:
+  schemas:
+    DateTimeObject:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+      properties:
+        date:
+          description: The date and time in RFC 3339, section 5.6 format.
+          format: date-time
+          type: string
+      required:
+      - date
+

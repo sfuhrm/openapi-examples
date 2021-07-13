@@ -1,0 +1,12 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/com/ionos/demo/daytime/openapi/OpenAPI2SpringBoot.java
+src/main/java/com/ionos/demo/daytime/openapi/RFC3339DateFormat.java
+src/main/java/com/ionos/demo/daytime/openapi/api/ApiUtil.java
+src/main/java/com/ionos/demo/daytime/openapi/api/DaytimeApi.java
+src/main/java/com/ionos/demo/daytime/openapi/api/DaytimeApiController.java
+src/main/java/com/ionos/demo/daytime/openapi/model/DateTimeObject.java
+src/main/java/org/openapitools/configuration/HomeController.java
+src/main/java/org/openapitools/configuration/OpenAPIDocumentationConfig.java
+src/main/resources/application.properties

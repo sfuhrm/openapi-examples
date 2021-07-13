@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: stephan.fuhrmann@ionos.com
+  description: Manages a shopping cart
+  license:
+    name: GNU GENERAL PUBLIC LICENSE v3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.txt
+  title: Shopping cart API
+  version: 0.1.1
+servers:
+- description: Localhost
+  url: http://localhost:8080/api/
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/sfuhrm.de/ShoppingCart/0.0.1
+tags:
+- description: All shopping cart operations
+  name: Middleware
+- description: Browser-facing calls
+  name: User
+paths:
+  /carts:
+    get:
+      description: |
+        Lists all shopping carts.
+      operationId: listCarts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ShoppingCartObject'
+                type: array
+          description: The shopping cart list.
+      tags:
+      - Middleware
+      x-accepts: application/json
+    post:
+      description: |
+        Creates a new shopping cart.
+      operationId: newCart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingCartObject'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingCartObject'
+          description: The shopping cart service response.
+          links:
+            GetCartByCartId:
+              operationId: getCartById
+              parameters:
+                cartId: $response.body#/id
+      tags:
+      - User
+      - Middleware
+      x-contentType: application/json
+      x-accepts: application/json
+  /cart/{cartId}:
+    delete:
+      description: |
+        Deletes the shopping cart.
+      operationId: deleteCartById
+      parameters:
+      - explode: false
+        in: path
+        name: cartId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingCartObject'
+          description: The shopping cart service response.
+      tags:
+      - User
+      - Middleware
+      x-accepts: application/json
+    get:
+      description: |
+        Gets the shopping cart.
+      operationId: getCartById
+      parameters:
+      - explode: false
+        in: path
+        name: cartId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingCartObject'
+          description: The shopping cart service response.
+          links:
+            GetCartItems:
+              operationId: getCartItems
+              parameters:
+                cartId: $response.body#/id
+      tags:
+      - User
+      - Middleware
+      x-accepts: application/json
+  /cart/{cartId}/items:
+    get:
+      description: |
+        Gets the shopping cart items.
+      operationId: getCartItems
+      parameters:
+      - explode: false
+        in: path
+        name: cartId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ShoppingCartItem'
+                type: array
+          description: The shopping cart service response.
+      tags:
+      - User
+      - Middleware
+      x-accepts: application/json
+    put:
+      description: |
+        Updates the shopping cart items.
+      operationId: putCartItems
+      parameters:
+      - explode: false
+        in: path
+        name: cartId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ShoppingCartItem'
+                type: array
+          description: The shopping cart service response.
+      tags:
+      - User
+      - Middleware
+      x-accepts: application/json
+components:
+  parameters:
+    CartIdParam:
+      explode: false
+      in: path
+      name: cartId
+      required: true
+      schema:
+        type: string
+      style: simple
+  schemas:
+    ShoppingCartObject:
+      example:
+        owner: stephan.fuhrmann
+        expires_at: 2000-01-23T04:56:07.000+00:00
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+      properties:
+        id:
+          readOnly: true
+          type: string
+        owner:
+          example: stephan.fuhrmann
+          readOnly: true
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        expires_at:
+          format: date-time
+          type: string
+    ShoppingCartItem:
+      example:
+        quantity: 1
+        index: 0
+        item_asin: B0711Z67W9
+      properties:
+        index:
+          example: 0
+          format: int32
+          minimum: 0
+          type: integer
+        quantity:
+          example: 1
+          format: int32
+          minimum: 1
+          type: integer
+        item_asin:
+          example: B0711Z67W9
+          pattern: '[0-9A-Z]{10}'
+          type: string
+      required:
+      - item_asin
+      - quantity
+
